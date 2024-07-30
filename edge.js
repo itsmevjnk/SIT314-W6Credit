@@ -147,11 +147,17 @@ app.listen(process.env.EDGE_PORT, () => {
     setInterval(() => {
         if(tempAvg === null) return; // no temperature data yet
 
-        var body = JSON.stringify({
+        const setting = {
             state: (occupiedSeats > 0),
             power: occupiedSeats,
             currentTemperature: tempAvg.value
+        };
+        settingLog.create({
+            timestamp: Date.now(),
+            data: setting
         });
+
+        var body = JSON.stringify(setting);
         console.log('sending to HVAC node:', body);
         (new http.ClientRequest({
             hostname: '127.0.0.1', // localhost

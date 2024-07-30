@@ -8,7 +8,7 @@ const uuid = require('crypto').randomUUID(); // get random UUID for identificati
 console.log('simulated temperature sensor with UUID', uuid);
 
 const http = require('http');
-var temperature = 10.0;
+var temperature = 20.0;
 setInterval(() => {
     var body = JSON.stringify({
         id: uuid,
